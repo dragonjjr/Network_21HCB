@@ -37,8 +37,8 @@ class LoginThread(QObject):
 
 class RemoteControl():
     def __init__(self):
-        self.app = QApplication(sys.argv)
-        QApplication.setQuitOnLastWindowClosed(False)
+        #self.app = QApplication(sys.argv)
+        #QApplication.setQuitOnLastWindowClosed(False)
 
         self.host_mail = MailService()
 
@@ -58,7 +58,7 @@ class RemoteControl():
         #self.tray_icon.show()
         #self.config_window.show()
         self.auto_run_check()
-        sys.exit(self.app.exec_())
+        #sys.exit(self.app.exec_())
 
     def __run_thread(self, status, close_window):
         '''
