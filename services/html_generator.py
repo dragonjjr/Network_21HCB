@@ -1,14 +1,16 @@
 
 import os
 
-#Tạo html table cho những yêu cầu xem dữ liệu dưới dạng danh sách
-def html_table(dataframe, note = '', format = 'center'):
-    #dataframe: là một python dictionnary với 3 trường type, columns và data.
-        #type: xác định kiểu bảng dòng đơn hay gồm nhiều nhóm.
-        #columns: tên những cột trong bảng
-        #data: mảng các dòng dữ liệu.
-    #note: ghi chú đi kèm với bảng, kiểu chuỗi
-    #format: canh lề các ô trong văn bản, kiểu chuỗi
+# Tạo html table cho những yêu cầu xem dữ liệu dưới dạng danh sách
+
+
+def html_table(dataframe, note='', format='center'):
+    # dataframe: là một python dictionnary với 3 trường type, columns và data.
+    # type: xác định kiểu bảng dòng đơn hay gồm nhiều nhóm.
+    # columns: tên những cột trong bảng
+    # data: mảng các dòng dữ liệu.
+    # note: ghi chú đi kèm với bảng, kiểu chuỗi
+    # format: canh lề các ô trong văn bản, kiểu chuỗi
     html = ''
 
     if note:
@@ -29,7 +31,7 @@ def html_table(dataframe, note = '', format = 'center'):
 
     if type == 'single':
         n_row = len(dataframe['data'])
-        
+
         for i in range(n_row):
             html += '<tr class="'
             if i % 2 == 1:
@@ -44,7 +46,7 @@ def html_table(dataframe, note = '', format = 'center'):
 
     elif type == 'group':
         n_group = len(data)
-         
+
         for i in range(n_group):
             group_name = data[i][0]
             group_data = data[i][1]
@@ -78,8 +80,10 @@ def html_table(dataframe, note = '', format = 'center'):
 
     return html
 
-#tạo ra html text để trả lời cho người điều khiển dưới dạng văn bản
-def html_msg(msg, status = None, bold_all=False):
+# tạo ra html text để trả lời cho người điều khiển dưới dạng văn bản
+
+
+def html_msg(msg, status=None, bold_all=False):
     content = msg
     _class = ''
 
@@ -93,7 +97,9 @@ def html_msg(msg, status = None, bold_all=False):
     html = f'<p lang="en" class="message {_class}">{content}</p>'
     return html
 
-#Tạo ra mã html ở dạng ASCII để phục vụ cho thao tác duyệt xem cây thư mục.
+# Tạo ra mã html ở dạng ASCII để phục vụ cho thao tác duyệt xem cây thư mục.
+
+
 def html_tree(path, sub_dirs):
     path = path if path else 'this device'
 
@@ -105,7 +111,7 @@ def html_tree(path, sub_dirs):
     html = f'<p>The directory tree for <span style="font-weight: bold;">{path}</span> (1 - level):</p>'
 
     ascii_tree = path if path else 'This device/'
-    
+
     if len(sub_dirs) > 0:
         for i in range(len(sub_dirs)):
             name = sub_dirs[i]
@@ -119,9 +125,11 @@ def html_tree(path, sub_dirs):
 
     return html
 
-#tạo ra html đầy đủ để trả lời cho người điều khiển
-#request: Lệnh điều khiển
-#content: nội dung được tạo ra từ các hàm khác để trả lời lệnh
+# tạo ra html đầy đủ để trả lời cho người điều khiển
+# request: Lệnh điều khiển
+# content: nội dung được tạo ra từ các hàm khác để trả lời lệnh
+
+
 def html_mail(request, content):
     html_template = '''
     <!DOCTYPE html>
@@ -148,16 +156,22 @@ def html_mail(request, content):
                 border-radius: 10px;
                 padding: 6px 30px 30px 30px;
                 width: 700px;
+                background: #fff8ed;
             }
 
             .app__name {
                 text-align: center;
                 font-size: 24px;
-                color: #1e9d95;
+                color: #54bded;
                 font-weight: bold;
             }
 
-            .app__greeting,
+            .app__greeting
+            {
+                text-align: right;
+                font-style: italic;
+            }
+
             .app__desc {
                 text-align: center;
             }
@@ -178,6 +192,7 @@ def html_mail(request, content):
                 margin: 0 auto;
                 border-collapse: collapse;
                 overflow: hidden;
+                border: outset;
             }
 
             table td, table th {
@@ -199,9 +214,10 @@ def html_mail(request, content):
             }
 
             th {
-                background-color: #76dfd8;
+                background-color: #54bded;
                 border-left: 1px solid #c6cbcd;
                 border-right: 1px solid #c6cbcd;
+                color: white;
             }
 
             td {
@@ -218,8 +234,9 @@ def html_mail(request, content):
             }
 
             tr.odd-row td {
-                background-color: #e6f8f7;
+                background-color: #ffedfd;
             }
+
 
             /* CSS for message */
             .message {
@@ -252,10 +269,9 @@ def html_mail(request, content):
         <div class='main'>
             <div class="container">
                 <p class="app__name">Remote Control Computer with Email Service</p>
-                <p class="app__greeting">Greeting from <span style='font-weight: bold;'>21424028-21424031-21424057</span> - 21HCB - HCMUS</p>
+                <p class="app__greeting">Greeting from 21HCB - HCMUS</p>
                 <div class='divider'></div>
             </div>
-
             <div class="container">
                 <p>This mail responses to the request: <span class="request" lang="en">''' + request + '''</span></p>
             </div>
@@ -268,6 +284,6 @@ def html_mail(request, content):
         </div>
         </body>
     </html>
-    '''       
-    
+    '''
+
     return html_template
