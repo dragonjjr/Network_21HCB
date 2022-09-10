@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="logo">
+    <file>Assets/Images/logo.png</file>
+  </qresource>
+  <qresource prefix="logo_black">
+    <file>Assets/Images/logo.png</file>
+    <file>Assets/Images/logo_1.png</file>
+  </qresource>
+  <qresource prefix="back">
+    <file>Assets/Images/back.png</file>
+  </qresource>
+</RCC>

@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QDialog, QApplication,QMainWindow
 from PyQt5.uic import loadUi
 from configuration import Configuration
@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
         self.home = Home()
         self.stackedWidget.addWidget(self.home)
         self.home.btnConfiguration.clicked.connect(self.go_to_second)
-        self.configuration = Configuration()
+        self.configuration = Configuration(self)
         self.stackedWidget.addWidget(self.configuration)
         self.configuration.btnBack.clicked.connect(self.go_to_first)
 
@@ -28,5 +28,8 @@ class MainWindow(QMainWindow):
 if __name__ == '__main__':
     app = QApplication([])
     window = MainWindow()
+    window.setWindowIcon(QtGui.QIcon('Assets/Images/logo.png'))
+    window.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+    window.setWindowTitle("Remote Control with Email Service")
     window.show()
     app.exec_()
