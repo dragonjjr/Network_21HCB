@@ -50,16 +50,18 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>70</x>
         <y>-10</y>
-        <width>871</width>
-        <height>61</height>
+        <width>784</width>
+        <height>55</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Cooper Black</family>
+        <family>Arial</family>
         <pointsize>28</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
@@ -73,14 +75,14 @@
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>240</y>
+        <y>250</y>
         <width>240</width>
         <height>61</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Century Gothic</family>
+        <family>Arial</family>
         <pointsize>12</pointsize>
         <weight>75</weight>
         <italic>false</italic>
@@ -113,7 +115,7 @@ QPushButton:hover{
       </property>
       <property name="font">
        <font>
-        <family>Century Gothic</family>
+        <family>Arial</family>
         <pointsize>12</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -141,7 +143,7 @@ QPushButton:hover{
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>90</y>
+        <y>100</y>
         <width>101</width>
         <height>71</height>
        </rect>
