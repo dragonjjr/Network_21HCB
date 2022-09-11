@@ -136,32 +136,6 @@
       <string>Advanced Controllers</string>
      </property>
     </widget>
-    <widget class="QListView" name="lvBasic">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>100</y>
-       <width>331</width>
-       <height>193</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="lvAdvanced">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>100</y>
-       <width>331</width>
-       <height>192</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="btnAddBasic">
      <property name="geometry">
       <rect>
@@ -300,6 +274,38 @@ QPushButton:hover{
      </property>
      <property name="text">
       <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="lvBasic">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>331</width>
+       <height>192</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+font: 10pt &quot;Arial&quot;;
+color: rgb(0, 0, 0);
+padding: 2px;</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="lvAdvanced">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>100</y>
+       <width>331</width>
+       <height>192</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+font: 10pt &quot;Arial&quot;;
+color: rgb(0, 0, 0);
+padding: 2px;</string>
      </property>
     </widget>
    </widget>
