@@ -13,7 +13,7 @@ def show_notification_thread(timeout = 300):
             title = "Remote Control with Email Service",
             message = "Remote Control is running",
             app_name = 'Remote Control with Email Service',
-            app_icon = 'ui/assets/icons/remote_logo.ico',
+            app_icon = 'Assets/Images/logo.ico',
             timeout = 5
         )
 
