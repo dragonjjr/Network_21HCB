@@ -1,11 +1,12 @@
 import sys
 
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QDialog, QApplication,QMainWindow
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
 from UI.configuration import Configuration
 from UI.home import Home
 from PyQt5.QtCore import QSize
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -23,6 +24,7 @@ class MainWindow(QMainWindow):
 
     def go_to_second(self):
         self.stackedWidget.setCurrentIndex(1)
+        self.configuration.render_config()
 
 
 if __name__ == '__main__':
@@ -30,7 +32,8 @@ if __name__ == '__main__':
     window = MainWindow()
     window.setFixedSize(window.size())
     window.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
-    window.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
+    window.setWindowFlags(QtCore.Qt.WindowCloseButtonHint |
+                          QtCore.Qt.WindowMinimizeButtonHint)
     window.setWindowTitle("Remote Control with Email Service")
     window.show()
     app.exec_()
