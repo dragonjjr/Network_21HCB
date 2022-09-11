@@ -27,7 +27,7 @@
    </property>
    <property name="font">
     <font>
-     <family>Century Gothic</family>
+     <family>Arial</family>
      <pointsize>12</pointsize>
      <weight>75</weight>
      <bold>true</bold>
@@ -153,7 +153,7 @@ QLabel, QLineEdit {
    </property>
    <property name="font">
     <font>
-     <family>Century Gothic</family>
+     <family>Microsoft Tai Le</family>
      <pointsize>20</pointsize>
      <weight>75</weight>
      <italic>false</italic>
