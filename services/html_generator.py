@@ -270,6 +270,7 @@ def html_mail(request, content):
             <div class="container">
                 <p class="app__name">Remote Control Computer with Email Service</p>
                 <p class="app__greeting">Greeting from 21HCB - HCMUS</p>
+                <p class="app__greeting">21424028 - 21424031 - 21424057</p>
                 <div class='divider'></div>
             </div>
             <div class="container">
