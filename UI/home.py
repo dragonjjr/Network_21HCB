@@ -1,7 +1,9 @@
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QDialog
 from PyQt5.uic import loadUi
 import UI.logo
 import sys
+from PyQt5 import QtCore, QtGui
+from UI.mymessagebox import MyMessageBox
 sys.path.append('..')
 
 from remote_control import *
@@ -22,6 +24,10 @@ class Home(QWidget):
 	def btnRun_click(self):
 		self.setup()
 		RemoteControl().start()
+		dialog = QDialog()
+		dialog.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
+		dialog.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
+		msg = MyMessageBox(title='', message='Remote control is running', dialog=dialog)
 
 
 	
