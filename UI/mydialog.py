@@ -44,4 +44,4 @@ class MyDialog(QDialog):
 			messagebox = QDialog()
 			messagebox.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
 			messagebox.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
-			uimess = MyMessageBox("Regex Email","Email invalid",messagebox)
+			uimess = MyMessageBox("Validate Email","Email invalid",messagebox)
