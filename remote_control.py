@@ -12,6 +12,7 @@ from helpers import *
 from thread_targets import *
 import app_logging as logging
 
+
 class LoginThread(QObject):
     ok = pyqtSignal(MailService)
     fail = pyqtSignal()
@@ -25,69 +26,73 @@ class LoginThread(QObject):
         print('Login to mail server...')
         logging.log('Login to mail server...')
         status = self.host_mail.login(REMOTE_MAIL, REMOTE_PWD)
-        
+
         if status:
             print('Login successfully')
             logging.log('Login successfully')
             self.ok.emit(self.host_mail)
         else:
-            print('Failed to login with login with name: ' + REMOTE_MAIL)                
+            print('Failed to login with login with name: ' + REMOTE_MAIL)
             logging.log(f'Failed to login with login with name: {REMOTE_MAIL}')
             self.fail.emit()
         logging.save()
         self.finished.emit()
 
+
 class RemoteControl():
     def __init__(self):
         #self.app = QApplication(sys.argv)
-        #QApplication.setQuitOnLastWindowClosed(False)
+        # QApplication.setQuitOnLastWindowClosed(False)
 
         self.host_mail = MailService()
 
         # Signals from ConfigWindow
         #self.config_window.signals.run.connect(lambda: self.__run(close_window = True))
-        #self.config_window.signals.exit.connect(self.exit)
-        
+        # self.config_window.signals.exit.connect(self.exit)
+
         # Signals from TrayIcon
-        #self.tray_icon.signals.open.connect(self.config_window.show)
-        #self.tray_icon.signals.exit.connect(self.exit)
+        # self.tray_icon.signals.open.connect(self.config_window.show)
+        # self.tray_icon.signals.exit.connect(self.exit)
 
     def auto_run_check(self):
-        if global_variables.app_configs['auto_run']:
-            self.__run(close_window = False)
+        # if global_variables.app_configs['auto_run']:
+        self.__run(close_window=False)
 
     def start(self):
-        #self.tray_icon.show()
-        #self.config_window.show()
+        # self.tray_icon.show()
+        # self.config_window.show()
         self.auto_run_check()
-        #sys.exit(self.app.exec_())
+        # sys.exit(self.app.exec_())
 
     def __run_thread(self, status, close_window):
         '''
             Run threads for app if status is True
             After that, the Run button will become Hide button, the config window will closed or not based on close_window
         '''
-        #self.__dialog.close()
+        # self.__dialog.close()
         if status == True:
             # Start checking mail box and show notifications
-            self.checking_thread = threading.Thread(target = check_email_thread, args = (self.host_mail, ))
+            self.checking_thread = threading.Thread(
+                target=check_email_thread, args=(self.host_mail, ))
             self.checking_thread.daemon = True
             self.checking_thread.start()
-            self.noti_thread = threading.Thread(target = show_notification_thread, args = ())
+            self.noti_thread = threading.Thread(
+                target=show_notification_thread, args=())
             self.noti_thread.daemon = True
             self.noti_thread.start()
-            #self.config_window.background_setup(close_window)
+            # self.config_window.background_setup(close_window)
         else:
             dialog = QDialog()
             dialog.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
             dialog.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
-            msg = MyMessageBox(title='Error', message='Cannot login to mail server. Please try again later.', dialog=dialog)
+            msg = MyMessageBox(
+                title='Error', message='Cannot login to mail server. Please try again later.', dialog=dialog)
 
     def __run(self, close_window):
         '''
             Run the app (first run button click or auto-run)
         '''
-        #self.__dialog.show()
+        # self.__dialog.show()
 
         # create thread and start
         self.__thread = QThread()
@@ -98,10 +103,11 @@ class RemoteControl():
 
         self.__target.finished.connect(self.__thread.quit)
         self.__target.ok.connect(lambda: self.__run_thread(True, close_window))
-        self.__target.fail.connect(lambda: self.__run_thread(False, close_window))
-        
+        self.__target.fail.connect(
+            lambda: self.__run_thread(False, close_window))
+
         self.__thread.start()
-        
+
     def __show_msg(self, msg):
         msg.exec_()
 
@@ -115,7 +121,7 @@ class RemoteControl():
                 print('Exception raised while loging out')
                 logging.log('Exception raised while loging out')
                 pass
-        
+
         logging.log('App closed')
         logging.save()
         sys.exit()
