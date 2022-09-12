@@ -14,6 +14,8 @@ class Home(QWidget):
 		super(Home,self).__init__()
 		loadUi("UI/ui_Home.ui",self)
 		self.btnRun.clicked.connect(self.btnRun_click)
+		self.btnExit.clicked.connect(self.btnExit_click)
+		self.RemoteControl = RemoteControl()
 
 	def setup(self):
 	    cfg = load_config('app_configs.yaml')
@@ -23,13 +25,12 @@ class Home(QWidget):
 
 	def btnRun_click(self):
 		self.setup()
-		RemoteControl().start()
-		dialog = QDialog()
-		dialog.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
-		dialog.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
-		msg = MyMessageBox(title='', message='Remote control is running', dialog=dialog)
+		self.RemoteControl.start()
+		if self.RemoteControl.status == False:
+			dialog = QDialog()
+			dialog.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
+			dialog.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
+			msg = MyMessageBox(title='Message', message='Remote control is running', dialog=dialog)
 
-
-	
-		
-		
+	def btnExit_click(self):
+		self.RemoteControl.exit()

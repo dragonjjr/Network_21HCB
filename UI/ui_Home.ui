@@ -158,6 +158,41 @@ QPushButton:hover{
        <pixmap resource="resource.qrc">:/logo/Assets/Images/logo.png</pixmap>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnExit">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>510</y>
+        <width>240</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 				rgba(0, 235, 235, 255), stop:1 rgba(85, 255, 255, 255));
+	color: rgb(0, 0, 0);
+	border-radius : 25px;
+}
+
+QPushButton:hover{
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0.38806 rgba(255, 15, 172, 255), stop:0.995025 rgba(255, 43, 198, 255));
+}</string>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_2"/>
    </widget>

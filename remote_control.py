@@ -1,8 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QApplication
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import QThread, pyqtSignal, QObject
-
+from UI.mymessagebox import MyMessageBox
 from mail_service import MailService
+from PyQt5.QtWidgets import QWidget, QDialog
 
 import global_variables
 
@@ -41,6 +43,7 @@ class RemoteControl():
         #QApplication.setQuitOnLastWindowClosed(False)
 
         self.host_mail = MailService()
+        self.status = False
 
         # Signals from ConfigWindow
         #self.config_window.signals.run.connect(lambda: self.__run(close_window = True))
@@ -58,6 +61,7 @@ class RemoteControl():
         #self.tray_icon.show()
         #self.config_window.show()
         self.auto_run_check()
+        self.status = True
         #sys.exit(self.app.exec_())
 
     def __run_thread(self, status, close_window):
@@ -76,7 +80,10 @@ class RemoteControl():
             self.noti_thread.start()
             #self.config_window.background_setup(close_window)
         else:
-            self.__show_msg('Cannot login to mail server. Please try again later.')
+            dialog = QDialog()
+            dialog.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
+            dialog.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
+            msg = MyMessageBox(title='Error', message='Cannot login to mail server. Please try again later.', dialog=dialog)
 
     def __run(self, close_window):
         '''
@@ -103,9 +110,11 @@ class RemoteControl():
     def exit(self):
         if self.host_mail:
             try:
+                print('Logout successfully')
                 logging.log('Logout mail server...')
                 self.host_mail.logout()
             except:
+                print('Exception raised while loging out')
                 logging.log('Exception raised while loging out')
                 pass
         
