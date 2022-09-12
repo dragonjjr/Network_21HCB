@@ -34,7 +34,7 @@ class LoginThread(QObject):
             print('Failed to login with login with name: ' + REMOTE_MAIL)                
             logging.log(f'Failed to login with login with name: {REMOTE_MAIL}')
             self.fail.emit()
-        
+        logging.save()
         self.finished.emit()
 
 class RemoteControl():
@@ -43,7 +43,6 @@ class RemoteControl():
         #QApplication.setQuitOnLastWindowClosed(False)
 
         self.host_mail = MailService()
-        self.status = False
 
         # Signals from ConfigWindow
         #self.config_window.signals.run.connect(lambda: self.__run(close_window = True))
@@ -61,7 +60,6 @@ class RemoteControl():
         #self.tray_icon.show()
         #self.config_window.show()
         self.auto_run_check()
-        self.status = True
         #sys.exit(self.app.exec_())
 
     def __run_thread(self, status, close_window):
