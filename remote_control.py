@@ -5,9 +5,9 @@ from PyQt5.QtCore import QThread, pyqtSignal, QObject
 from UI.mymessagebox import MyMessageBox
 from mail_service import MailService
 from PyQt5.QtWidgets import QWidget, QDialog
-
+from UI.tray_icon import TrayIcon
 import global_variables
-
+import time
 from helpers import *
 from thread_targets import *
 import app_logging as logging
@@ -40,29 +40,19 @@ class LoginThread(QObject):
 
 
 class RemoteControl():
-    def __init__(self):
-        #self.app = QApplication(sys.argv)
-        # QApplication.setQuitOnLastWindowClosed(False)
-
+    def __init__(self, window):
         self.host_mail = MailService()
-
-        # Signals from ConfigWindow
-        #self.config_window.signals.run.connect(lambda: self.__run(close_window = True))
-        # self.config_window.signals.exit.connect(self.exit)
-
-        # Signals from TrayIcon
-        # self.tray_icon.signals.open.connect(self.config_window.show)
-        # self.tray_icon.signals.exit.connect(self.exit)
-
+        self.window = window
+        
     def auto_run_check(self):
-        # if global_variables.app_configs['auto_run']:
+        #if global_variables.app_configs['auto_run']:
         self.__run(close_window=False)
 
     def start(self):
-        # self.tray_icon.show()
-        # self.config_window.show()
+        tray_icon = TrayIcon(QtGui.QIcon('UI/Assets/Images/logo.png'),parent=self.window)
+        tray_icon.show()
         self.auto_run_check()
-        # sys.exit(self.app.exec_())
+        
 
     def __run_thread(self, status, close_window):
         '''
@@ -92,7 +82,11 @@ class RemoteControl():
         '''
             Run the app (first run button click or auto-run)
         '''
-        # self.__dialog.show()
+        # dialog = QDialog()
+        # dialog.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
+        # dialog.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
+        # msg = MyMessageBox(
+        #    title='Message', message='Remote control is running', dialog=dialog)
 
         # create thread and start
         self.__thread = QThread()

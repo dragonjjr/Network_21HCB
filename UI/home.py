@@ -1,6 +1,6 @@
 import global_variables
 from remote_control import *
-from PyQt5.QtWidgets import QWidget, QDialog
+from PyQt5.QtWidgets import QWidget, QDialog, QSystemTrayIcon, QMenu, QAction
 from PyQt5.uic import loadUi
 import UI.logo
 import sys
@@ -10,14 +10,22 @@ sys.path.append('..')
 
 
 class Home(QWidget):
-    def __init__(self):
+    def __init__(self, window):
         super(Home, self).__init__()
         loadUi("UI/ui_Home.ui", self)
+        self.window = window
         self.setup()
+        self.remote_control_is_running = False
+        if global_variables.app_configs['auto_run']:
+            RemoteControl(self.window).start()
+            self.window.hide()
+            self.btnRun.setText('Hide')
+            self.remote_control_is_running = True
+        if global_variables.app_configs['auto_run'] == False:
+            self.btnRun.setText('Run')
         self.btnRun.clicked.connect(self.btnRun_click)
         self.btnExit.clicked.connect(self.btnExit_click)
-        if global_variables.app_configs['auto_run']:
-            RemoteControl().start()
+
 
     def setup(self):
         cfg = load_config('app_configs.yaml')
@@ -26,13 +34,13 @@ class Home(QWidget):
         global_variables.app_configs['auto_run'] = cfg['auto_run']
 
     def btnRun_click(self):
-        # self.setup()
-        RemoteControl().start()
-        dialog = QDialog()
-        dialog.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint, False)
-        dialog.setWindowIcon(QtGui.QIcon('UI/Assets/Images/logo.png'))
-        msg = MyMessageBox(
-            title='Message', message='Remote control is running', dialog=dialog)
+        if(self.remote_control_is_running == False):
+            self.btnRun.setText('Hide')
+            self.remote_control_is_running = True
+            RemoteControl(self.window).start()
+        else:
+            self.window.hide()
+        
 
     def btnExit_click(self):
-        RemoteControl().exit()
+        RemoteControl(self).exit()
